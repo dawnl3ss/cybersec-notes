@@ -1,0 +1,3 @@
+unshadow passwd.txt shadow.txt > crackme.txt
+john --wordlist=rockyou.txt crackme.txt
+john --show crackme.txt

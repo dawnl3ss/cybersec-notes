@@ -4,10 +4,12 @@ We'll see how to bypass developper restrictions for file uploading with PHP :
 
 I. Context :
 
-Websites like forums, online chats or social networks set-up file upload system for avatar and images. These system are often secure but
+Websites like forums, online chats or social networks set-up file upload system for avatars and images. These systems are often secure but
 sometimes this security can be bypass.
 
 4 cas différents :
     - aucune sécu n'est mise en place -> simple upload d'un fichiers malicieux (rev-shell, file-reader...)
     - le système check le Content-Type dans la requète HTTP Post -> changer le Content-Type (le mettre dans le format requis pour le site)
     - le système check l'extension du fichier -> upload un fichier malicieux avec une double extension (ex: rev-shell.php.jpg)
+
+(à ecrire en anglais)

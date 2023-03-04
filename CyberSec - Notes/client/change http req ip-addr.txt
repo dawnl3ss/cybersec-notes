@@ -1,3 +1,0 @@
-You just need to add a specific header to your http request :
-
-X-Forwarded-For: <your-ip>

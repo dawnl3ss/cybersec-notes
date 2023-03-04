@@ -5,3 +5,6 @@ python2 /usr/share/john/ssh2john.py id_rsa > id_rsa.john
 
 then bruteforce the john hash file :
 john id_rsa.john --wordlist=/usr/share/wordlists/rockyou.txt
+
+and you can show the private keyword with :
+john --show id_rsa.john

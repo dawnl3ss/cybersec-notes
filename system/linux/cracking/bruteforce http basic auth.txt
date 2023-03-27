@@ -1,0 +1,1 @@
+hydra -l username -P /path/to/wordlist <target-ip> -f -f -V http-get

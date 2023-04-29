@@ -1,0 +1,28 @@
+We'll see how to bypass file inclusion restrictions by using PHP Filters to read file content on the server.
+
+I. Context :
+
+Some web applications are using a strange method to display their html content : they
+basically use GET parametters to tell the application which page should be displayed.
+For example, you can have a website like that :
+    http://random-webapp.com/index.php?page=help.php
+
+In most cases, these applications are vulnerable to a certain type of exploit : php filters bypass.
+It permits to read the entire content of a file, even though it is a php file which normally has a server-sided execution.
+
+II. Exploitation :
+
+Imagine that you have a website following this url : http://vulnerable.com.
+On the index page, you can choose which page you want to go :
+    http://vulnerable.com/index.php?page=home.php       or
+    http://vulnerable.com/index.php?page=login.php
+
+Now imagine that the developper hid credentials in the login.php file to connect as admin on this webapp.
+Then, you can display the entire content by getting the base64 encoded string of this file.
+To accomplish that, you'll need to use php filter (convert.base64-encode) :
+    http://vulnerable.com/index.php?page=php://filter/convert.base64-encode/resource=login.php
+
+Okay, you got the base64 encoded content of the login.php file. Now you just have to decode it :
+    echo 'base64_encoded_string' | base64 --decode
+
+And now you can read the content ! :)

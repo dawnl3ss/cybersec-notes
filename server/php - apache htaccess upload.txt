@@ -45,4 +45,4 @@ It should look like that (rce.txt) :
 
 Now you can upload both files, and you sucessfully have a RCE !
 For instance, just curl the url with a random command :
-    `curl http://web-app/uploads/rce.txt?cmd=pwd`
+    - `curl http://web-app/uploads/rce.txt?cmd=pwd`

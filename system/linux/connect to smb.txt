@@ -1,0 +1,1 @@
+smbclient \\\\IP\Folder
